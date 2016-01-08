@@ -1,11 +1,13 @@
 __author__ = 'aiswarya'
 
 subtree = {}
-num_break_edge =0
+num_break_edge = 0
+
 
 def get_subtree(G, v):
     global subtree
     if G[v] == None:
+        subtree[v] = 1
         return 1
     children = G[v]
     node_count = 1
@@ -17,7 +19,14 @@ def get_subtree(G, v):
 
 def dfs_count_break_edge(G, v):
     global num_break_edge
-    if
+    if subtree[v] == 1:
+        return
+    adj = G[v]
+    for each in adj:
+        if subtree[each] % 2 == 0:
+            num_break_edge += 1
+        dfs_count_break_edge(G, each)
+
 
 line = input().split()
 N = int(line[0])
@@ -34,5 +43,7 @@ for each in range(M):
     if each == 0:
         root = v1
 get_subtree(G, root)
+dfs_count_break_edge(G, root)
+print(num_break_edge)
 
 
